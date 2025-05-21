@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -21,23 +22,18 @@ class User implements UserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+    #[ORM\Column]
+    private ?string $password = null;
+
     #[ORM\Column(type: 'float')]
     private float $argent = 0.0;
 
-    /**
-     * @var Collection<int, Achat>
-     */
     #[ORM\OneToMany(targetEntity: Achat::class, mappedBy: 'id_utilisateur')]
     private Collection $achats;
 
-    /**
-     * @var Collection<int, Abonnement>
-     */
     #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'id_utilisateur')]
     private Collection $abonnements;
 
@@ -60,10 +56,8 @@ class User implements UserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
-
 
     public function getArgent(): float
     {
@@ -73,54 +67,42 @@ class User implements UserInterface
     public function setArgent(float $argent): static
     {
         $this->argent = $argent;
-
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+        return $this;
+    }
+
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+         return ['ROLE_USER'];
 
-        return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Achat>
-     */
     public function getAchats(): Collection
     {
         return $this->achats;
@@ -132,25 +114,19 @@ class User implements UserInterface
             $this->achats->add($achat);
             $achat->setIdUtilisateur($this);
         }
-
         return $this;
     }
 
     public function removeAchat(Achat $achat): static
     {
         if ($this->achats->removeElement($achat)) {
-            // set the owning side to null (unless already changed)
             if ($achat->getIdUtilisateur() === $this) {
                 $achat->setIdUtilisateur(null);
             }
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Abonnement>
-     */
     public function getAbonnements(): Collection
     {
         return $this->abonnements;
@@ -162,19 +138,16 @@ class User implements UserInterface
             $this->abonnements->add($abonnement);
             $abonnement->setIdUtilisateur($this);
         }
-
         return $this;
     }
 
     public function removeAbonnement(Abonnement $abonnement): static
     {
         if ($this->abonnements->removeElement($abonnement)) {
-            // set the owning side to null (unless already changed)
             if ($abonnement->getIdUtilisateur() === $this) {
                 $abonnement->setIdUtilisateur(null);
             }
         }
-
         return $this;
     }
 }

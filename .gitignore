@@ -27,3 +27,6 @@
 /.idea/
 /.vscode/
 ###< IDEs ###
+
+
+migrations/
