@@ -12,9 +12,7 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // obtenir l’erreur de connexion s’il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
-        // dernier email saisi
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -26,7 +24,6 @@ class SecurityController extends AbstractController
     #[Route('/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // Ce code ne sera jamais exécuté
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 }
