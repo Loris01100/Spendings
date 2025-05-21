@@ -17,7 +17,7 @@ class AbonnementRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Abonnement[] Returns an array of Abonnement objects
+//     * @return AbonnementFixtures[] Returns an array of AbonnementFixtures objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class AbonnementRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Abonnement
+//    public function findOneBySomeField($value): ?AbonnementFixtures
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')
