@@ -1,0 +1,236 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+
+    a, h1, h2, li, p, strong{
+        color: #d8f3dc;
+    }
+
+    h1{
+        font-family: "Anton", sans-serif;
+        font-weight: lighter;
+        font-size: 70px;
+    }
+
+    h2{
+        font-family: "Anton", sans-serif;
+        font-weight: lighter;
+    }
+
+    nav{
+        margin: 0;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 10%;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 200px;
+        color: #d8f3dc;
+    }
+
+    a{
+        color: #d8f3dc;
+        text-decoration: none;
+    }
+
+    a:hover{
+        text-decoration: underline;
+    }
+
+    svg{
+        position: relative;
+        padding: 0;
+        left: 20px;
+    }
+
+    .main{
+        width: 80%;
+        position: relative;
+        height: 100px;
+        margin: 30px;
+        left: 10%;
+    }
+
+    .main-title{
+        position: relative;
+        margin: 0;
+    }
+
+    .main-subtitle{
+        position: relative;
+        top: -28px;
+        left: 115px;
+        font-style: italic;
+    }
+
+    #container{
+        background-color: #3c8062;
+        border-radius: 25px;
+        position: relative;
+        margin: 40px;
+        border: 1px solid #52b788;
+        width: 700px;
+        height: 250px;
+        padding: 40px;
+    }
+
+    .box-contaner{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+        height: 90%;
+        width: 95%;
+        margin-left: 50px;
+        margin-bottom: 100px;
+    }
+
+    footer{
+        height: 50px;
+        width: 100%;
+        background-color: #3c8062;
+        margin: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #d8f3dc;
+        position: relative;
+    }
+</style>
+
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         width="60pt" height="60pt" viewBox="0 0 300.000000 257.000000"
+         preserveAspectRatio="xMidYMid meet">
+        <metadata>
+            Created by potrace 1.10, written by Peter Selinger 2001-2011
+        </metadata>
+        <g transform="translate(0.000000,257.000000) scale(0.100000,-0.100000)"
+           fill="#d8f3dc" stroke="none">
+            <path d="M1695 2370 c-189 -46 -318 -162 -379 -341 -55 -162 -12 -361 106
+                -489 77 -85 166 -133 281 -154 225 -42 443 70 541 277 18 40 36 88 40 107 16
+                96 17 117 6 183 -14 80 -53 167 -108 240 -44 58 -163 140 -235 163 -64 19
+                -198 27 -252 14z m187 -31 c147 -31 270 -128 336 -266 36 -77 37 -80 37 -198
+                0 -120 0 -120 -40 -200 -83 -167 -238 -265 -419 -265 -140 0 -238 41 -339 141
+                -141 141 -173 347 -84 532 91 189 307 298 509 256z"/>
+            <path d="M1714 2260 c-92 -19 -187 -83 -243 -164 -137 -198 -63 -465 158 -573
+                50 -25 67 -28 161 -28 93 0 111 3 163 27 119 56 210 177 226 302 34 268 -201
+                488 -465 436z m16 -70 c-7 -17 -25 -40 -41 -51 -46 -32 -72 -77 -74 -128 -5
+                -81 45 -147 155 -207 39 -21 50 -32 48 -48 -2 -15 -10 -21 -27 -21 -19 0 -30
+                10 -45 40 -26 50 -64 65 -100 42 -56 -37 -46 -118 23 -186 26 -25 52 -58 59
+                -73 11 -26 10 -28 -11 -28 -41 0 -127 49 -180 102 -75 75 -101 148 -95 266 3
+                64 10 99 27 132 29 56 104 135 153 161 36 19 109 39 117 33 2 -2 -2 -17 -9
+                -34z m215 9 c71 -33 131 -93 167 -167 30 -60 33 -75 33 -157 0 -80 -3 -97 -30
+                -150 -38 -75 -98 -136 -169 -169 -117 -55 -129 -17 -26 82 37 36 49 57 55 89
+                8 49 -17 114 -58 152 l-26 24 32 16 c76 38 72 134 -7 206 -25 22 -49 52 -55
+                68 -10 25 -9 27 14 27 14 0 45 -9 70 -21z m-117 -31 c2 -29 8 -38 21 -38 27 0
+                72 -39 87 -76 20 -47 17 -78 -7 -100 -28 -25 -52 -8 -60 41 -4 21 -15 44 -25
+                52 -27 20 -81 16 -104 -7 -43 -43 -23 -75 86 -141 73 -44 89 -58 106 -95 15
+                -36 17 -51 9 -82 -12 -43 -42 -75 -83 -91 -22 -8 -28 -17 -28 -39 0 -32 -16
+                -52 -42 -52 -21 0 -39 30 -35 61 1 15 -4 24 -18 28 -59 17 -100 72 -93 126 7
+                61 70 57 76 -4 3 -26 10 -35 35 -46 39 -16 80 -10 103 16 30 33 8 64 -85 122
+                -103 64 -125 91 -125 154 0 60 23 96 75 120 32 15 39 23 39 49 0 38 7 46 40
+                42 21 -3 25 -9 28 -40z m0 -161 c6 -5 12 -20 12 -32 0 -12 7 -28 15 -35 30
+                -25 6 -21 -39 5 -33 19 -46 33 -46 49 0 13 3 25 6 29 7 6 33 -1 52 -16z"/>
+            <path d="M274 1388 c-42 -20 -44 -42 -44 -439 l0 -381 29 -29 29 -29 179 0
+                c199 0 213 4 239 66 24 56 54 52 374 -47 407 -127 373 -119 501 -120 108 0
+                219 21 294 57 40 19 334 245 355 272 3 4 83 69 177 146 95 76 186 153 202 172
+                53 60 64 140 30 212 -31 63 -89 102 -151 102 -63 0 -92 -15 -207 -109 -127
+                -103 -203 -161 -211 -161 -4 0 -19 18 -34 40 -46 70 -62 74 -317 80 l-226 5
+                -38 34 c-54 47 -150 90 -246 109 -101 19 -209 7 -326 -38 -103 -40 -173 -40
+                -173 0 0 9 -12 29 -26 44 l-27 26 -181 -1 c-103 0 -190 -5 -202 -11z m394 -30
+                c7 -7 12 -30 12 -53 l0 -41 73 4 c50 2 93 12 142 32 39 16 109 34 156 41 74
+                10 97 9 161 -5 93 -21 182 -63 231 -110 l38 -36 220 0 c199 0 223 -2 258 -20
+                39 -19 81 -84 81 -124 0 -23 -4 -25 160 109 223 182 226 185 277 185 60 0 106
+                -29 132 -84 24 -49 26 -73 9 -128 -12 -42 20 -14 -516 -452 -107 -87 -215
+                -169 -240 -181 -115 -55 -304 -71 -442 -36 -41 10 -196 57 -345 105 -220 70
+                -282 86 -332 86 l-63 0 0 -45 c0 -34 -5 -47 -19 -55 -12 -6 -93 -10 -195 -10
+                -145 0 -177 3 -190 16 -14 13 -16 63 -16 395 0 243 4 387 10 400 10 18 23 19
+                198 19 133 0 192 -4 200 -12z"/>
+            <path d="M340 957 l0 -332 130 0 130 0 0 333 0 332 -130 0 -130 0 0 -333z
+                m218 1 l-3 -293 -85 0 -85 0 -3 293 -2 292 90 0 90 0 -2 -292z"/>
+            <path d="M970 1241 c-30 -10 -77 -28 -105 -41 -40 -17 -64 -21 -117 -18 l-68
+                4 0 -228 0 -228 73 0 c75 0 112 -10 567 -158 142 -46 147 -47 270 -46 136 0
+                195 16 278 72 87 58 671 544 677 563 4 11 -2 36 -12 57 -34 69 -47 63 -282
+                -126 -116 -93 -228 -178 -248 -188 -34 -17 -68 -19 -306 -22 -272 -3 -297 0
+                -297 34 0 7 7 20 16 28 13 14 51 16 259 16 l244 0 21 27 c16 20 20 36 16 58
+                -12 59 -15 60 -275 65 l-238 5 -41 37 c-108 98 -291 135 -432 89z m292 -42
+                c29 -11 76 -38 103 -59 88 -66 82 -65 306 -66 113 -1 215 -5 227 -8 28 -9 30
+                -51 3 -66 -12 -6 -109 -10 -242 -10 -203 1 -226 -1 -249 -18 -36 -27 -38 -71
+                -5 -102 l25 -24 249 1 c205 0 258 3 303 17 59 19 107 53 333 235 82 67 155
+                121 162 121 16 0 36 -37 30 -54 -4 -11 -339 -289 -598 -498 -154 -124 -331
+                -148 -551 -74 -327 110 -499 160 -560 164 -37 2 -72 10 -78 17 -7 8 -9 77 -8
+                191 l3 179 65 6 c36 3 90 16 120 29 126 54 256 61 362 19z"/>
+        </g>
+    </svg>
+
+    <nav>
+        <a href="/connexion">Connexion</a>
+        <a href="/abonnement">Abonnements</a>
+        <a href="/achat">Achats</a>
+    </nav>
+
+    <div class="main">
+        <h1 class="main-title">🏠 Bienvenue sur Spendings</h1>
+        <strong class="main-subtitle">Maîtrisez vos finances, simplement</strong>
+    </div>
+
+    <div class="box-contaner">
+
+        <div id="container">
+            <h2>💼 Que pouvez-vous faire avec Spendings ?</h2>
+            <ul>
+                <li>Visualiser votre portefeuille en un coup d’œil (dépenses, abonnements, etc...)</li>
+                <li>Suivre l'évolution de vos dépenses en temps réel</li>
+                <li>Analyser votre compte en banque avec des données interactives</li>
+                <li>Fixer des objectifs financiers et mesurer vos progrès</li>
+                <li>Recevoir des alertes  basées sur votre épargne</li>
+            </ul>
+        </div>
+
+        <div id="container">
+            <h2>🔒 Pourquoi choisir Spendings ?</h2>
+            <ul>
+                <li>Sécurité des données : chiffrement de bout en bout & protection avancée</li>
+                <li>Interface claire et ergonomique : tout est pensé pour vous simplifier la vie</li>
+                <li>Support multi-appareils : accessible depuis votre ordinateur, tablette ou smartphone</li>
+                <li>Aucune publicité : votre attention est précieuse, elle reste la vôtre</li>
+                <li>Mises à jour régulières : fonctionnalités enrichies selon vos retours</li>
+            </ul>
+        </div>
+
+        <div id="container">
+            <h2>👥 Pour qui est-ce fait ?</h2>
+            <ul>
+                <li>Les débutants qui veulent reprendre le contrôle de leurs finances</li>
+                <li>Les investisseurs avertis en quête d’un outil performant et centralisé</li>
+                <li>Les étudiants, salariés, entrepreneurs ou retraités : tous ceux qui veulent voir clair dans leurs épargnes</li>
+            </ul>
+        </div>
+
+        <div id="container">
+            <h2>🚀 Commencez aujourd’hui</h2>
+            <p>Créer un compte ne prend que quelques secondes.</p>
+            <strong>Prenez le pouvoir sur votre argent dès maintenant.</strong><br><br>
+            <a href="">👉 [Créer mon compte]</a><br>
+            <a href="">👉 [Découvrir les fonctionnalités]</a><br>
+        </div>
+    </div>
+
+    <footer>
+        Spendings©
+    </footer>
+{% endblock %}
