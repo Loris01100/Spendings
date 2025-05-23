@@ -5,10 +5,10 @@
 {% block body %}
     <style>
         /* Texte défilant */
-        .messagedefilant, .messagedefilant2, .messagedefilant3, .messagedefilant4 {
+        .messagedefilant, .messagedefilant2, .messagedefilant3, .messagedefilant4, .messagedefilant5, .messagedefilant6, .messagedefilant7, .messagedefilant8 {
             z-index: -1;
             display: block;
-            margin: 40px auto;
+            margin: 35px auto;
             padding: 0;
             overflow: hidden;
             position: relative;
@@ -17,12 +17,12 @@
             height: 60px;
         }
 
-        .messagedefilant div, .messagedefilant2 div, .messagedefilant3 div, .messagedefilant4 div{
+        .messagedefilant div, .messagedefilant2 div, .messagedefilant3 div, .messagedefilant4 div, .messagedefilant5 div, .messagedefilant6 div, .messagedefilant7 div, .messagedefilant8 div{
             position: absolute;
             min-width: 100%; /* au minimum la largeur du conteneur */
         }
 
-        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span{
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
             position: relative;
             display: inline-block;
             font-size: 2rem;
@@ -30,7 +30,7 @@
             top:0;
         }
 
-        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span {
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
             animation: defilement 10s infinite linear;
             font-family: "Poppins", sans-serif;
             font-weight: bolder;
@@ -38,21 +38,56 @@
         }
 
         .messagedefilant2 div span {
-            animation: defilement 12s infinite linear;
+            animation: defilement 11s infinite linear;
             font-family: "Poppins", sans-serif;
             font-weight: bolder;
             font-style: italic;
         }
 
         .messagedefilant3 div span {
-            animation: defilement 13s infinite linear;
+            animation: defilement 12s infinite linear;
             font-family: "Poppins", sans-serif;
             font-weight: bolder;
             font-style: italic;
         }
 
         .messagedefilant4 div span {
+            animation: defilement 13s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant5 div span {
             animation: defilement 14s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant6 div span {
+            animation: defilement 15s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant7 div span {
+            animation: defilement 16s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant8 div span {
+            animation: defilement 17s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant9 div span {
+            animation: defilement 18s infinite linear;
             font-family: "Poppins", sans-serif;
             font-weight: bolder;
             font-style: italic;
@@ -172,20 +207,24 @@
     <div class="messagedefilant3">
         <div><span>💸Dépenses💸</span></div>
     </div>
-    <div class="messagedefilant2">
+    <div class="messagedefilant7">
         <div><span>💶Economies💶</span></div>
     </div>
 
-    <div class="messagedefilant">
+    <div class="messagedefilant5">
         <div><span>🔃Abonnements🔃</span></div>
     </div>
 
-    <div class="messagedefilant4">
+    <div class="messagedefilant6">
         <div><span>📁Organisé📁</span></div>
     </div>
 
-    <div class="messagedefilant3">
+    <div class="messagedefilant4">
         <div><span>👌Efficace👌</span></div>
+    </div>
+
+    <div class="messagedefilant8">
+        <div><span>🤙Eddy;)🤙</span></div>
     </div>
 
 {% endblock %}
