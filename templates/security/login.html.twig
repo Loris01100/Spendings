@@ -3,19 +3,189 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+    <style>
+        /* Texte défilant */
+        .messagedefilant, .messagedefilant2, .messagedefilant3, .messagedefilant4 {
+            z-index: -1;
+            display: block;
+            margin: 40px auto;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            color: white;
+            height: 60px;
+        }
+
+        .messagedefilant div, .messagedefilant2 div, .messagedefilant3 div, .messagedefilant4 div{
+            position: absolute;
+            min-width: 100%; /* au minimum la largeur du conteneur */
+        }
+
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span{
+            position: relative;
+            display: inline-block;
+            font-size: 2rem;
+            white-space: nowrap;
+            top:0;
+        }
+
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span {
+            animation: defilement 10s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant2 div span {
+            animation: defilement 12s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant3 div span {
+            animation: defilement 13s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant4 div span {
+            animation: defilement 14s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        @keyframes defilement {
+            0% { margin-left: -20%; }
+            100% { margin-left: 100%; }
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            font-size: 50px;
+            position: relative;
+            top: -30px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            flex-direction: column;
+            gap: 10px;
+            top: -30px;
+            position: relative;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #3c8062;
+            border-radius: 25px;
+            position: relative;
+            margin: 40px;
+            border: 1px solid #52b788;
+            padding: 40px;
+            width: 20%;
+            left: auto;
+            height: 350px;
+        }
+        .center{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            width: 100%;
+            height: 36px;
+            border: 2px solid #333;
+            box-sizing: border-box;
+            background-color: #d8f3dc;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: gray;
+            background-color: white;
+        }
+        button{
+            background-color: #d8f3dc;
+            border-radius: 25px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 170px;
+            margin: 0;
+            top: 10px;
+            position: relative;
+            height: 50px;
+            font-size: 20px;
+        }
+        button:focus{
+            background-color: #52b788;
+            border-color: white;
+            font-style: italic;
+        }
+    </style>
 
     {% if error %}
         <div style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+    <div class="center">
+        <div class="container">
+            <h1>Connexion</h1>
 
-    <form method="post">
-        <label for="inputEmail">Email</label>
-        <input type="email" name="_username" id="inputEmail" value="{{ last_username }}" required autofocus>
+            <form method="post">
+                <label for="inputEmail">Email</label>
+                <input type="email" name="_username" id="inputEmail" value="{{ last_username }}" required autofocus>
 
-        <label for="inputPassword">Mot de passe</label>
-        <input type="password" name="_password" id="inputPassword" required>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="_password" id="inputPassword" required>
 
-        <button type="submit">Se connecter</button>
-    </form>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </div>
+    <div class="messagedefilant">
+        <div><span>💲Epargne💲</span></div>
+    </div>
+
+    <div class="messagedefilant4">
+        <div><span>🏠Spendings🏠</span></div>
+    </div>
+
+    <div class="messagedefilant2">
+        <div><span>🤑Argents🤑</span></div>
+    </div>
+
+    <div class="messagedefilant3">
+        <div><span>💸Dépenses💸</span></div>
+    </div>
+    <div class="messagedefilant2">
+        <div><span>💶Economies💶</span></div>
+    </div>
+
+    <div class="messagedefilant">
+        <div><span>🔃Abonnements🔃</span></div>
+    </div>
+
+    <div class="messagedefilant4">
+        <div><span>📁Organisé📁</span></div>
+    </div>
+
+    <div class="messagedefilant3">
+        <div><span>👌Efficace👌</span></div>
+    </div>
+
 {% endblock %}
