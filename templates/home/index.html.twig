@@ -178,9 +178,16 @@
     </svg>
 
     <nav>
+    {% if app.user %}
+        <span>Connecté en tant que {{ app.user.email }}</span>
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% else %}
         <a href="/connexion">Connexion</a>
+    {% endif %}        
         <a href="/abonnement">Abonnements</a>
         <a href="/achat">Achats</a>
+        <a href="{{ path('app_register') }}">Inscription</a>
+
     </nav>
 
     <div class="main">
