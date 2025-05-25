@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -37,10 +37,17 @@ class User implements UserInterface
     #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'id_utilisateur')]
     private Collection $abonnements;
 
+    /**
+     * @var Collection<int, Group>
+     */
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users')]
+    private Collection $groupdata;
+
     public function __construct()
     {
         $this->achats = new ArrayCollection();
         $this->abonnements = new ArrayCollection();
+        $this->groupdata = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +155,33 @@ class User implements UserInterface
                 $abonnement->setIdUtilisateur(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getGroupdata(): Collection
+    {
+        return $this->groupdata;
+    }
+
+    public function addGroupdatum(Group $groupdatum): static
+    {
+        if (!$this->groupdata->contains($groupdatum)) {
+            $this->groupdata->add($groupdatum);
+            $groupdatum->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupdatum(Group $groupdatum): static
+    {
+        if ($this->groupdata->removeElement($groupdatum)) {
+            $groupdatum->removeUser($this);
+        }
+
         return $this;
     }
 }
