@@ -3,6 +3,232 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+    <style>
+        /* Texte défilant */
+        .messagedefilant, .messagedefilant2, .messagedefilant3, .messagedefilant4, .messagedefilant5, .messagedefilant6, .messagedefilant7, .messagedefilant8 {
+            z-index: -1;
+            display: block;
+            margin: 35px auto;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            color: white;
+            height: 60px;
+        }
+
+        .messagedefilant div, .messagedefilant2 div, .messagedefilant3 div, .messagedefilant4 div, .messagedefilant5 div, .messagedefilant6 div, .messagedefilant7 div, .messagedefilant8 div{
+            position: absolute;
+            min-width: 100%; /* au minimum la largeur du conteneur */
+        }
+
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
+            position: relative;
+            display: inline-block;
+            font-size: 2rem;
+            white-space: nowrap;
+            top:0;
+        }
+
+        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
+            animation: defilement 10s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant2 div span {
+            animation: defilement 11s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant3 div span {
+            animation: defilement 12s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant4 div span {
+            animation: defilement 13s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant5 div span {
+            animation: defilement 14s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant6 div span {
+            animation: defilement 15s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant7 div span {
+            animation: defilement 16s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant8 div span {
+            animation: defilement 17s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        .messagedefilant9 div span {
+            animation: defilement 18s infinite linear;
+            font-family: "Poppins", sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        @keyframes defilement {
+            0% { margin-left: -20%; }
+            100% { margin-left: 100%; }
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            font-size: 50px;
+            position: relative;
+            top: -30px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            flex-direction: column;
+            gap: 10px;
+            top: -30px;
+            position: relative;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #3c8062;
+            border-radius: 25px;
+            position: relative;
+            margin: 40px;
+            border: 1px solid #52b788;
+            padding: 40px;
+            width: 20%;
+            left: auto;
+            height: 350px;
+        }
+        .center{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            width: 100%;
+            height: 36px;
+            border: 2px solid #333;
+            box-sizing: border-box;
+            background-color: #d8f3dc;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: gray;
+            background-color: white;
+        }
+        button{
+            background-color: #d8f3dc;
+            border-radius: 25px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 170px;
+            margin: 0;
+            top: 10px;
+            position: relative;
+            height: 50px;
+            font-size: 20px;
+        }
+        button:focus{
+            background-color: #52b788;
+            border-color: white;
+            font-style: italic;
+        }
+        .scrolling-word {
+             position: absolute;
+             white-space: nowrap;
+             font-weight: bold;
+             top: calc(50% - 1em); /* Centré verticalement par défaut */
+         }
+    </style>
+    <script>
+        const words = ["Symphonie", "Inspiration", "Créativité", "Technologie", "Liberté"];
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createScrollingWord() {
+            const word = words[Math.floor(Math.random() * words.length)];
+            const fontSize = getRandomInt(16, 48);
+            const direction = Math.random() < 0.5 ? 'left' : 'right';
+            const speed = getRandomInt(5, 15);
+            const startTop = getRandomInt(10, window.innerHeight - 60);
+
+            const el = document.createElement('div');
+            el.className = 'scrolling-word';
+            el.style.fontSize = fontSize + 'px';
+            el.textContent = word;
+            el.style.position = 'absolute';
+            el.style.whiteSpace = 'nowrap';
+            el.style.top = startTop + 'px';
+            el.style.fontWeight = 'bold';
+
+            if (direction === 'left') {
+                el.style.left = '100%';
+            } else {
+                el.style.right = '100%';
+            }
+
+            document.body.appendChild(el);
+
+            const distance = window.innerWidth + el.offsetWidth;
+            const duration = distance / speed * 10;
+
+            el.animate([
+                { transform: 'translateX(0)' },
+                { transform: `translateX(${direction === 'left' ? '-' : ''}${distance}px)` }
+            ], {
+                duration: duration,
+                iterations: 1,
+                easing: 'linear'
+            }).onfinish = () => el.remove();
+        }
+
+        export function startWordScroller(interval = 1000) {
+            setInterval(createScrollingWord, interval);
+        }
+
+    </script>
+
     <h1>Inscription</h1>
 
     {{ form_start(registrationForm) }}

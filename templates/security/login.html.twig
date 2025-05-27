@@ -4,100 +4,6 @@
 
 {% block body %}
     <style>
-        /* Texte défilant */
-        .messagedefilant, .messagedefilant2, .messagedefilant3, .messagedefilant4, .messagedefilant5, .messagedefilant6, .messagedefilant7, .messagedefilant8 {
-            z-index: -1;
-            display: block;
-            margin: 35px auto;
-            padding: 0;
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            color: white;
-            height: 60px;
-        }
-
-        .messagedefilant div, .messagedefilant2 div, .messagedefilant3 div, .messagedefilant4 div, .messagedefilant5 div, .messagedefilant6 div, .messagedefilant7 div, .messagedefilant8 div{
-            position: absolute;
-            min-width: 100%; /* au minimum la largeur du conteneur */
-        }
-
-        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
-            position: relative;
-            display: inline-block;
-            font-size: 2rem;
-            white-space: nowrap;
-            top:0;
-        }
-
-        .messagedefilant div span, .messagedefilant2 div span, .messagedefilant3 div span, .messagedefilant4 div span, .messagedefilant5 div span, .messagedefilant6 div span, .messagedefilant7 div span, .messagedefilant8 div span{
-            animation: defilement 10s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant2 div span {
-            animation: defilement 11s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant3 div span {
-            animation: defilement 12s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant4 div span {
-            animation: defilement 13s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant5 div span {
-            animation: defilement 14s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant6 div span {
-            animation: defilement 15s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant7 div span {
-            animation: defilement 16s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant8 div span {
-            animation: defilement 17s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        .messagedefilant9 div span {
-            animation: defilement 18s infinite linear;
-            font-family: "Poppins", sans-serif;
-            font-weight: bolder;
-            font-style: italic;
-        }
-
-        @keyframes defilement {
-            0% { margin-left: -20%; }
-            100% { margin-left: 100%; }
-        }
-
         body{
             margin: 0;
             padding: 0;
@@ -122,7 +28,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: #3c8062;
+            background-color: rgba(60, 128, 98, 0.7);
             border-radius: 25px;
             position: relative;
             margin: 40px;
@@ -131,6 +37,7 @@
             width: 20%;
             left: auto;
             height: 350px;
+            backdrop-filter: blur(5px);
         }
         .center{
             position: fixed;
@@ -172,7 +79,62 @@
             border-color: white;
             font-style: italic;
         }
+        .scrolling-word {
+            position: absolute;
+            white-space: nowrap;
+            font-weight: bold;
+            top: calc(50% - 1em); /* Centré verticalement par défaut */
+        }
     </style>
+    <script>
+        const words = ["Symfony", "Créativité", "Technologie", "Liberté",
+            "🤙Eddy;)🤙", "👌Efficace👌", "📁Organisé📁", "🔃Abonnements🔃", "💶Economies💶", "💸Argents💸", "🤑Dépenses🤑", "🏠Spendings🏠", "💲Epargne💲"];
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createScrollingWord() {
+            const word = words[Math.floor(Math.random() * words.length)];
+            const fontSize = getRandomInt(16, 48); // Taille aléatoire entre 16px et 48px
+            const direction = Math.random() < 0.5 ? 'left' : 'right';
+            const speed = getRandomInt(5, 15); // Vitesse de déplacement
+            const startTop = getRandomInt(10, window.innerHeight - 60); // Position verticale
+
+            const el = document.createElement('div');
+            el.className = 'scrolling-word';
+            el.style.fontSize = fontSize + 'px';
+            el.textContent = word;
+            el.style.top = startTop + 'px';
+            el.style.color = 'white';
+            el.style.zIndex = -1;
+            el.style.position = "fixed";
+
+            if (direction === 'left') {
+                el.style.left = '100%';
+            } else {
+                el.style.right = '100%';
+            }
+
+            document.body.appendChild(el);
+
+            const distance = window.innerWidth + el.offsetWidth;
+            const duration = distance / speed * 100; // ajuster vitesse
+
+            el.animate([
+                direction === 'left' ? { transform: `translateX(0)` } : { transform: `translateX(0)` },
+                direction === 'left' ? { transform: `translateX(-${distance}px)` } : { transform: `translateX(${distance}px)` }
+            ], {
+                duration: duration,
+                iterations: 1,
+                easing: 'linear'
+            }).onfinish = () => {
+                el.remove();
+            };
+        }
+
+        setInterval(createScrollingWord, 2000); // Crée un nouveau mot chaque seconde
+    </script>
 
     {% if error %}
         <div style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -192,39 +154,4 @@
             </form>
         </div>
     </div>
-    <div class="messagedefilant">
-        <div><span>💲Epargne💲</span></div>
-    </div>
-
-    <div class="messagedefilant4">
-        <div><span>🏠Spendings🏠</span></div>
-    </div>
-
-    <div class="messagedefilant2">
-        <div><span>🤑Argents🤑</span></div>
-    </div>
-
-    <div class="messagedefilant3">
-        <div><span>💸Dépenses💸</span></div>
-    </div>
-    <div class="messagedefilant7">
-        <div><span>💶Economies💶</span></div>
-    </div>
-
-    <div class="messagedefilant5">
-        <div><span>🔃Abonnements🔃</span></div>
-    </div>
-
-    <div class="messagedefilant6">
-        <div><span>📁Organisé📁</span></div>
-    </div>
-
-    <div class="messagedefilant4">
-        <div><span>👌Efficace👌</span></div>
-    </div>
-
-    <div class="messagedefilant8">
-        <div><span>🤙Eddy;)🤙</span></div>
-    </div>
-
 {% endblock %}
