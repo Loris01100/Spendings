@@ -12,14 +12,16 @@ class CategorieFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        for ($i = 1; $i <= 5; $i++) {
-            $user = new Categorie();
-            $user->setNom($faker->name());
-            $manager->persist($user);
 
-            $this->addReference('utilisateur_' . $i, $user);
+        for ($i = 1; $i <= 5; $i++) {
+            $categorie = new Categorie();
+            $categorie->setNom($faker->word());
+            $manager->persist($categorie);
+
+            $this->addReference('categorie_' . $i, $categorie);
         }
 
         $manager->flush();
     }
 }
+

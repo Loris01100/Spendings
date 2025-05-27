@@ -6,29 +6,35 @@ use App\Entity\Achat;
 use App\Entity\User;
 use App\Entity\Categorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class AchatFixtures extends Fixture
+class AchatFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        for($i = 1; $i <= 20; $i++){
-            $post = new Achat();
 
-            $utilisateur = $this->getReference('utilisateur_' . $faker->numberBetween(1, 5));
-            $categorie = $this->getReference('categorie_' . $faker->numberBetween(1, 3));
-            $post->setIdUtilisateur($faker->randomDigit());
-            $post->setIdCategorie($faker->numberBetween(1, 5));
-            $post->setMontant($faker->randomFloat(2, 10, 100));
-            $post->setDateAchat(\DateTime::createFromFormat('d/m/Y', $faker->dateTimeBetween('-1 year', 'now')));
-            $post->setDescription($faker->realText());
+        for ($i = 1; $i <= 10; $i++) {
+            $achat = new Achat();
 
-            $manager->persist($post);
+            $achat->setIdUtilisateur($this->getReference('utilisateur_' . ($i % 5 + 1), User::class));
+            $achat->setIdCategorie($this->getReference('categorie_' . ($i % 5 + 1), Categorie::class));
+            $achat->setMontant($faker->randomFloat(2, 10, 100));
+            $achat->setDateAchat($faker->dateTimeBetween('-1 year', 'now'));
+            $achat->setDescription($faker->realText(50));
+
+            $manager->persist($achat);
         }
 
-
         $manager->flush();
+    }
+    public function getDependencies(): array
+    {
+        return [
+            UserFixtures::class,
+            CategorieFixtures::class,
+        ];
     }
 }
