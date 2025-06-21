@@ -3,6 +3,177 @@
 {% block title %}Liste des achats{% endblock %}
 
 {% block body %}
+<style>
+                    button{
+                        cursor: pointer;
+                    }
+                    body {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    h1 {
+                        font-size: 30px;
+                        position: relative;
+                        margin: 50px 150px 100px 250px;
+                        top: 100px;
+                    }
+                    .container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        background-color: #3c8062;
+                        border-radius: 25px;
+                        position: relative;
+                        margin: 40px;
+                        border: 1px solid #52b788;
+                        padding: 40px;
+                        width: 80%;
+                        left: auto;
+                    }
+                    .center {
+                        position: fixed;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        background-color: #d8f3dc;
+                        border-radius: 25px;
+                        overflow: hidden;
+                        margin-bottom: 30px;
+                    }
+                    th, td {
+                        padding: 12px 15px;
+                        text-align: center;
+                        border-bottom: 1px solid #52b788;
+                    }
+                    th {
+                        background-color: #3c8062;
+                        color: white;
+                        font-size: 18px;
+                    }
+                    tr:last-child td {
+                        border-bottom: none;
+                    }
+                    .btn {
+                        background-color: #d8f3dc;
+                        border-radius: 25px;
+                        border: 1px solid black;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 120px;
+                        margin: 0 auto;
+                        top: 10px;
+                        position: relative;
+                        height: 40px;
+                        font-size: 16px;
+                        color: #333;
+                        text-decoration: none;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .btn-success {
+                        background-color: #52b788;
+                        color: white;
+                        border: none;
+                        padding: 5px;
+                        width: 140px;
+                    }
+                    .btn-outline-primary {
+                        border: 1px solid #3c8062;
+                        color: #3c8062;
+                        background: none;
+                    }
+                    .btn-outline-danger {
+                        border: 1px solid #b30000;
+                        color: #b30000;
+                        background: none;
+                    }
+                    .btn-outline-primary:hover {
+                        color: white;
+                        background: #52b788;
+                    }
+                    .btn-outline-danger:hover {
+                        color: white;
+                        background: #b30000;
+                    }
+                    .btn-sm {
+                        width: 90px;
+                        height: 30px;
+                        font-size: 14px;
+                        margin: 2px;
+                    }
+                    .table-striped tbody tr:nth-child(odd) {
+                        background-color: #b7e4c7;
+                    }
+                    table{ 
+                        width: 80%;
+                        margin: auto;
+                    }
+                    nav{
+            margin: 0;
+            left: 0;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            height: 10%;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 200px;
+            color: #d8f3dc;
+        }
+
+        a{
+            color: #d8f3dc;
+            text-decoration: none;
+        }
+
+        a:hover{
+            text-decoration: underline;
+        }
+        .montant-total{
+            margin: auto;
+            font-size: 20px;
+            font-weight: light;
+            position: fixed;
+            bottom: 100px;
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #52b788;
+            border-radius: 25px;
+            padding: 0px;
+            border: 1px solid #3c8062;
+        }
+        .container-montant-total{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+                </style>
+                <nav>
+        {% if app.user %}
+            <span>Connecté en tant que {{ app.user.email }}</span>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="/connexion">Connexion</a>
+        {% endif %}
+        <a href="/abonnement">Abonnements</a>
+        <a href="/achat">Achats</a>
+        <a href="{{ path('app_register') }}">Inscription</a>
+
+    </nav>
     <h1>Liste des achats</h1>
 
     <div class="mb-3">
@@ -45,6 +216,12 @@
                 </tr>
             {% endfor %}
             </tbody>
+            <div class="container-montant-total">
+                <div class="montant-total">
+                    <p>Montant total dépensé : {{ montantTotal|number_format(2, ',', ' ') }} €</p>
+                </div>
+            </div>
+            
         </table>
     {% endif %}
     {{ dump(app.user) }}
