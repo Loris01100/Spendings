@@ -3,114 +3,110 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    body{
-        margin: 0;
-        padding: 0;
-    }
+    <style>
 
-    a, h1, h2, li, p, strong{
-        color: #d8f3dc;
-    }
+        a, h1, h2, li, p, strong{
+            color: #d8f3dc;
+        }
 
-    h1{
-        font-family: "Anton", sans-serif;
-        font-weight: lighter;
-        font-size: 70px;
-    }
+        h1{
+            font-family: "Anton", sans-serif;
+            font-weight: lighter;
+            font-size: 70px;
+        }
 
-    h2{
-        font-family: "Anton", sans-serif;
-        font-weight: lighter;
-    }
+        h2{
+            font-family: "Anton", sans-serif;
+            font-weight: lighter;
+        }
 
-    nav{
-        margin: 0;
-        left: 0;
-        top: 0;
-        position: absolute;
-        width: 100%;
-        height: 10%;
-        font-size: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 200px;
-        color: #d8f3dc;
-    }
+        nav{
+            margin: 0;
+            left: 0;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            height: 10%;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 200px;
+            color: #d8f3dc;
+        }
 
-    a{
-        color: #d8f3dc;
-        text-decoration: none;
-    }
+        a{
+            color: #d8f3dc;
+            text-decoration: none;
+        }
 
-    a:hover{
-        text-decoration: underline;
-    }
+        a:hover{
+            text-decoration: underline;
+        }
 
-    svg{
-        position: relative;
-        padding: 0;
-        left: 20px;
-    }
+        svg{
+            position: relative;
+            padding: 0;
+            left: 20px;
+        }
 
-    .main{
-        width: 80%;
-        position: relative;
-        height: 100px;
-        margin: 30px;
-        left: 10%;
-    }
+        .main{
+            width: 80%;
+            position: relative;
+            height: 100px;
+            margin: 30px;
+            left: 10%;
+        }
 
-    .main-title{
-        position: relative;
-        margin: 0;
-    }
+        .main-title{
+            position: relative;
+            margin: 0;
+        }
 
-    .main-subtitle{
-        position: relative;
-        top: -28px;
-        left: 115px;
-        font-style: italic;
-    }
+        .main-subtitle{
+            position: relative;
+            top: -28px;
+            left: 115px;
+            font-style: italic;
+        }
 
-    #container{
-        background-color: #3c8062;
-        border-radius: 25px;
-        position: relative;
-        margin: 40px;
-        border: 1px solid #52b788;
-        width: 700px;
-        height: 250px;
-        padding: 40px;
-    }
+        #container{
+            background-color: #3c8062;
+            border-radius: 25px;
+            position: relative;
+            margin: 40px;
+            border: 1px solid #52b788;
+            width: 700px;
+            height: 250px;
+            padding: 40px;
+        }
 
-    .box-contaner{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-wrap: wrap;
-        position: relative;
-        height: 90%;
-        width: 95%;
-        margin-left: 50px;
-        margin-bottom: 100px;
-    }
+        .box-contaner{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+            height: 90%;
+            width: 95%;
+            margin-left: 50px;
+            margin-bottom: 100px;
+        }
 
-    footer{
-        height: 50px;
-        width: 100%;
-        background-color: #3c8062;
-        margin: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #d8f3dc;
-        position: relative;
-    }
-</style>
+        footer{
+            height: 50px;
+            width: 100%;
+            background-color: #3c8062;
+            margin: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #d8f3dc;
+            position: relative;
+        }
+    </style>
 
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
          width="60pt" height="60pt" viewBox="0 0 300.000000 257.000000"
@@ -178,12 +174,12 @@
     </svg>
 
     <nav>
-    {% if app.user %}
-        <span>Connecté en tant que {{ app.user.email }}</span>
-        <a href="{{ path('app_logout') }}">Déconnexion</a>
-    {% else %}
-        <a href="/login">Connexion</a>
-    {% endif %}        
+        {% if app.user %}
+            <span>Connecté en tant que {{ app.user.email }}</span>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="/connexion">Connexion</a>
+        {% endif %}
         <a href="/abonnement">Abonnements</a>
         <a href="/achat">Achats</a>
         <a href="{{ path('app_register') }}">Inscription</a>

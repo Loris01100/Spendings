@@ -1,20 +1,430 @@
-{% extends '../../base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Hello AchatController!{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body{
+        margin: 0;
+        padding: 0;
+    }
+
+    a, h1, h2, li, p, strong{
+        color: #d8f3dc;
+    }
+
+    h1{
+        font-family: "Anton", sans-serif;
+        font-weight: lighter;
+        font-size: 70px;
+    }
+
+    h2{
+        font-family: "Anton", sans-serif;
+        font-weight: lighter;
+    }
+
+    nav{
+        margin: 0;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 10%;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 200px;
+        color: #d8f3dc;
+    }
+
+    a{
+        color: #d8f3dc;
+        text-decoration: none;
+    }
+
+    a:hover{
+        text-decoration: underline;
+    }
+
+    svg{
+        position: relative;
+        padding: 0;
+        left: 20px;
+    }
+
+    .main{
+        margin-top: 3%;
+        width: 100%;
+        position: absolute;
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .submain{
+        max-width: 800px;
+        width: 800px;
+        min-width: 20%;
+        position: relative;
+        height: 70%;
+        margin: 40px;
+    }
+
+    .main-subtitle{
+        position: relative;
+        max-width: 800px;
+        width: 800px;
+        min-width: 20%;
+        height: 15%;
+        margin-bottom: 20px;
+        background-color: #3c8062;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+    }
+
+    .categorie-1{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #ca8196;
+    }
+
+    .categorie-2{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #bf6868;
+    }
+
+    .categorie-3{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #7294d3;
+    }
+
+    .categorie-4{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #cccc6b;
+    }
+
+    .categorie-5{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #8064bc;
+    }
+
+    .categorie-6{
+        margin: 13px;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        background-color: #99bd5e;
+    }
+
+    .main-subtitle h2{
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 13px;
+        font-size: 40px;
+    }
+
+    .main-subtitle h3{
+        color: White;
+        position: absolute;
+        left: 100px;
+        top: 0;
+        margin: 13px;
+        font-size: 40px;
+    }
+
+    .main-subtitle p{
+        color: #d8f3dc;
+        position: absolute;
+        right: 100px;
+        top: 0px;
+        font-style: italic;
+        margin: 30px;
+        font-size: 15px;
+    }
+
+    .box-contaner{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+        height: 90%;
+        width: 95%;
+        margin-left: 50px;
+        margin-bottom: 100px;
+    }
+
+    footer{
+        height: 50px;
+        width: 100%;
+        background-color: #3c8062;
+        margin: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #d8f3dc;
+        position: absolute;
+    }
+
+    img{
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .subsubmain{
+        width: 100%;
+        height: 100%;
+        background-color: #3c8062;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+    }
+
+    .subsubmain-title{
+        font-size: 50px;
+        font-weight: bold;
+        margin-left: 30px;
+        margin-top: 10px;
+    }
+
+    .subsubmain-subtitle{
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 30px;
+        color: #d8f3dc;
+    }
+
+    .subsubmain-p{
+        font-size: 20px;
+        font-weight: 300;
+        margin-left: 30px;
+    }
+
+    .subsubmain-title-container1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #ca8196;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .subsubmain-title-container2{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #bf6868;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .subsubmain-title-container3{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #7294d3;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .subsubmain-title-container4{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #cccc6b;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .subsubmain-title-container5{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #8064bc;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .subsubmain-title-container6{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 18%;
+        background-color: #99bd5e;
+        border-radius: 10px;
+        border: 1px solid #52b788;
+        margin: 10px;
+    }
+
+    .categorie-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const svgMap = {
+            "categorie-1": "{{ asset('image/voiture-de-sport.svg') }}",
+            "categorie-2": "{{ asset('image/plage.svg') }}",
+            "categorie-3": "{{ asset('image/caddie.svg') }}",
+            "categorie-4": "{{ asset('image/cloche.svg') }}",
+            "categorie-5": "{{ asset('image/diplome.svg') }}",
+            "categorie-6": "{{ asset('image/loger.svg') }}"
+        };
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        const subtitles = document.querySelectorAll(".main-subtitle");
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/Spendings/src/Controller/AchatController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/Spendings/templates/achat/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+        subtitles.forEach(sub => {
+            const categoryDiv = sub.querySelector("[class^='categorie-']");
+            if (!categoryDiv) return;
+
+            const categoryClass = Array.from(categoryDiv.classList).find(cls => cls.startsWith("categorie-"));
+
+            if (categoryClass && svgMap[categoryClass]) {
+                const img = document.createElement("img");
+                img.src = svgMap[categoryClass];
+                img.alt = categoryClass;
+                img.width = 24;
+                img.height = 24;
+                categoryDiv.appendChild(img);
+            }
+        });
+    });
+</script>
+
+
+<nav>
+    {% if app.user %}
+        <span>Connecté en tant que {{ app.user.email }}</span>
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="/connexion">Connexion</a>
+    {% endif %}
+    <a href="/abonnement">Abonnements</a>
+    <a href="/achat">Achats</a>
+    <a href="{{ path('app_register') }}">Inscription</a>
+
+</nav>
+
+<div class="main">
+    <div class="submain">
+        <div class="main-subtitle">
+            <div class="categorie-1"></div>
+            <h3>Dépense 1</h3>
+            <p>Catégorie 1</p>
+            <h2>56€</h2>
+        </div>
+        <div class="main-subtitle">
+            <div class="categorie-2"></div>
+            <h3>Dépense 2</h3>
+            <p>Catégorie 2</p>
+            <h2>56€</h2>
+        </div>
+        <div class="main-subtitle">
+            <div class="categorie-3"></div>
+            <h3>Dépense 3</h3>
+            <p>Catégorie 3</p>
+            <h2>56€</h2>
+        </div>
+        <div class="main-subtitle">
+            <div class="categorie-4"></div>
+            <h3>Dépense 4</h3>
+            <p>Catégorie 4</p>
+            <h2>56€</h2>
+        </div>
+        <div class="main-subtitle">
+            <div class="categorie-5"></div>
+            <h3>Dépense 5</h3>
+            <p>Catégorie 5</p>
+            <h2>56€</h2>
+        </div>
+        <div class="main-subtitle">
+            <div class="categorie-6"></div>
+            <h3>Dépense 6</h3>
+            <p>Catégorie 6</p>
+            <h2>56€</h2>
+        </div>
+    </div>
+    <div class="submain">
+        <div class="subsubmain">
+            <h2 class="subsubmain-title">Statistiques de dépenses</h2>
+            <div class="categorie-container">
+                <div class="subsubmain-title-container1">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 1 : 156€</p>
+                </div>
+                <div class="subsubmain-title-container2">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 2 : 56€</p>
+                </div>
+                <div class="subsubmain-title-container3">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 3 : 56€</p>
+                </div>
+                <div class="subsubmain-title-container4">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 4 : 56€</p>
+                </div>
+                <div class="subsubmain-title-container5">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 5 : 56€</p>
+                </div>
+                <div class="subsubmain-title-container6">
+                    <h3 class="subsubmain-subtitle">Dépenses Moyennes :</h3>
+                    <p class="subsubmain-p">Catégorie 6 : 56€</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Spendings©
+    </footer>
+    {% endblock %}
