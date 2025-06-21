@@ -33,10 +33,17 @@ class AchatListGetController extends AbstractController
             'method' => 'POST',
         ]);
 
+        // Calculer le montant total dépensé
+        $montantTotal = 0;
+        foreach ($achats as $achat) {
+            $montantTotal += $achat->getMontant();
+        }
+
         return $this->render('pages/achat/list.html.twig', [
             'achats' => $achats,
             'formAchat' => $form->createView(),
             'categorie_id' => $categorie_id,
+            'montantTotal' => $montantTotal,
         ]);
 
     }

@@ -18,8 +18,15 @@ class AbonnementListGetController extends AbstractController
 {
     public function __invoke(AbonnementRepository $repo): Response
     {
+        // Calculer le montant total des abonnements pour l'utilisateur connecté
+        $abonnements = $repo->findBy(['id_utilisateur' => $this->getUser()]);
+        $montantTotal = 0;
+        foreach ($abonnements as $abonnement) {
+            $montantTotal += $abonnement->getMontant();
+        }
         return $this->render('pages/abonnement/list.html.twig', [
             'abonnements' => $repo->findBy(['id_utilisateur' => $this->getUser()]),
+            'montantTotal' => $montantTotal,
         ]);
     }
 }
