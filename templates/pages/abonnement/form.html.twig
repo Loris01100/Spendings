@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ is_edit ? 'Modifier un abonnement' : 'Ajouter un abonnement' }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2>{{ is_edit ? 'Modifier un abonnement' : 'Ajouter un abonnement' }}</h2>
+
+        {{ form_start(form) }}
+        {{ form_row(form.libelle) }}
+        {{ form_row(form.montant) }}
+        {{ form_row(form.frequence) }}
+        {{ form_row(form.date_debut) }}
+        {{ form_row(form.date_fin) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.id_categorie) }}
+
+        <button class="btn {{ is_edit ? 'btn-warning' : 'btn-success' }}">
+            {{ is_edit ? 'Modifier' : 'Ajouter' }}
+        </button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_abonnement_list_get') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    </div>
+{% endblock %}

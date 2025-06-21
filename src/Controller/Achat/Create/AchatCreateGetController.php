@@ -26,6 +26,7 @@ class AchatCreateGetController extends AbstractController
         return $this->render('pages/achat/form.html.twig', [
             'page_title' => 'Nouvel Achat',
             'form' => $form->createView(),
+            'is_edit' => false,
         ]);
     }
 }

@@ -18,7 +18,7 @@ class AchatRepository extends ServiceEntityRepository
     public function getAchats(?int $utilisateurId, ?int $categorieId): array
     {
         $qb = $this->createQueryBuilder('a')
-            ->orderBy('a.dateAchat', 'DESC');
+            ->orderBy('a.date_achat', 'DESC');
 
         if ($utilisateurId !== null) {
             $qb->andWhere('a.utilisateur = :utilisateurId')
@@ -26,10 +26,12 @@ class AchatRepository extends ServiceEntityRepository
         }
 
         if ($categorieId !== null) {
-            $qb->andWhere('a.categorie = :categorieId')
+            $qb->andWhere('a.id_categorie = :categorieId')
                 ->setParameter('categorieId', $categorieId);
         }
 
         return $qb->getQuery()->getResult();
     }
+
+
 }

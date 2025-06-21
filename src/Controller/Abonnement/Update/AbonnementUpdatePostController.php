@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Controller\Abonnement;
+namespace App\Controller\Abonnement\Update;
 
 
 use App\Entity\Abonnement;
+use App\Form\Type\AbonnementType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,13 +20,13 @@ class AbonnementUpdatePostController extends AbstractController
 {
     public function __invoke(Request $request, Abonnement $abonnement, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(Abonnement::class, $abonnement);
+        $form = $this->createForm(AbonnementType::class, $abonnement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_get_list_abonnement');
+        return $this->redirectToRoute('app_abonnement_list_get');
     }
 }
