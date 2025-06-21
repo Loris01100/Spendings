@@ -12,20 +12,27 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(
-    path: '/achat/{id}/edit',
+    path: '/achat/{id}/update',
     name: 'app_achat_update_post',
     requirements: ['id' => '\d+'],
     methods: ['POST']
 )]
-#[IsGranted('ROLE_ADMIN')]
+#[IsGranted('ROLE_USER')]
 class AchatUpdatePostController extends AbstractController
 {
     public function __invoke(
         Achat $achat,
-        Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        Request $request
     ): Response {
-        $form = $this->createForm(AchatType::class, $achat);
+        if ($achat->getUtilisateur() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Accès interdit');
+        }
+
+        $form = $this->createForm(AchatType::class, $achat, [
+            'is_edit' => true,
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,8 +43,8 @@ class AchatUpdatePostController extends AbstractController
         }
 
         return $this->render('pages/achat/form.html.twig', [
-            'page_title' => 'Modifier un achat',
             'form' => $form->createView(),
+            'achatToEdit' => true,
         ]);
     }
 }

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des abonnements{% endblock %}
+
+{% block body %}
+    <h1>Liste des abonnements</h1>
+
+    <div class="mb-3">
+        <a href="{{ path('app_abonnement_create_get') }}" class="btn btn-success">
+            Ajouter un abonnement
+        </a>
+    </div>
+
+    {% if abonnements is empty %}
+        <p>Aucun abonnement trouvé.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Libellé</th>
+                <th>Montant</th>
+                <th>Fréquence</th>
+                <th>Date début</th>
+                <th>Date fin</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for abonnement in abonnements %}
+                <tr>
+                    <td>{{ abonnement.id }}</td>
+                    <td>{{ abonnement.libelle }}</td>
+                    <td>{{ abonnement.montant|number_format(2, ',', ' ') }} €</td>
+                    <td>{{ abonnement.frequence.name }}</td>
+                    <td>{{ abonnement.dateDebut ? abonnement.dateDebut|date('d/m/Y') : '—' }}</td>
+                    <td>{{ abonnement.dateFin ? abonnement.dateFin|date('d/m/Y') : '—' }}</td>
+                    <td>{{ abonnement.idCategorie ? abonnement.idCategorie.nom : '—' }}</td>
+                    <td>
+                        <a href="{{ path('app_abonnement_update_get', { id: abonnement.id }) }}"
+                           class="btn btn-sm btn-outline-primary">
+                            Modifier
+                        </a>
+                        <form method="post"
+                              action="{{ path('app_abonnement_delete_post', {id: abonnement.id}) }}"
+                              style="display:inline"
+                              onsubmit="return confirm('Supprimer cet abonnement ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_abonnement_' ~ abonnement.id) }}">
+                            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

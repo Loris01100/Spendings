@@ -9,12 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(
-    path: '/achat/{id}/edit',
-    name: 'app_achat_update_get',
-    requirements: ['id' => '\d+'],
-    methods: ['GET']
-)]
+#[Route('/achat/{id}/update', name: 'app_achat_update_get', methods: ['GET'])]
 #[IsGranted('ROLE_ADMIN')]
 class AchatUpdateGetController extends AbstractController
 {
@@ -23,8 +18,9 @@ class AchatUpdateGetController extends AbstractController
         $form = $this->createForm(AchatType::class, $achat);
 
         return $this->render('pages/achat/form.html.twig', [
-            'page_title' => 'Modifier un achat',
             'form' => $form->createView(),
+            'achatToEdit' => $achat,
+            'is_edit' => true,
         ]);
     }
 }

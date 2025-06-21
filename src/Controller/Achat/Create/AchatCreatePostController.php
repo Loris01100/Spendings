@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
     name: 'app_achat_create_post',
     methods: ['POST']
 )]
-#[IsGranted('ROLE_ADMIN')]
+#[IsGranted('ROLE_USER')]
 class AchatCreatePostController extends AbstractController
 {
     public function __invoke(
@@ -24,18 +24,25 @@ class AchatCreatePostController extends AbstractController
         Request $request
     ): Response {
         $achat = new Achat();
-        $form = $this->createForm(AchatType::class, $achat);
+
+        // Associer l'utilisateur connecté
+        $achat->setUtilisateur($this->getUser());
+
+        $form = $this->createForm(AchatType::class, $achat, [
+            'is_edit' => false,
+        ]);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($achat);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Achat ajouté avec succès.');
             return $this->redirectToRoute('app_achat_list_get');
         }
 
         return $this->render('pages/achat/form.html.twig', [
-            'page_title' => 'Nouvel Achat',
             'form' => $form->createView(),
         ]);
     }

@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controller\Achat\List;
+
+use App\Entity\Achat;
+use App\Form\Type\AchatType;
 use App\Repository\AchatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(
-    path: '/achats',
+    path: '/achat',
     name: 'app_achat_list_get',
     methods: ['GET']
 )]
@@ -19,16 +22,22 @@ class AchatListGetController extends AbstractController
     public function __invoke(
         AchatRepository $achatRepository,
         #[MapQueryParameter]
-        ?int $utilisateur_id = null,
-        #[MapQueryParameter]
         ?int $categorie_id = null
     ): Response {
-        $achats = $achatRepository->getAchats($utilisateur_id, $categorie_id);
+        $user = $this->getUser(); // utilisateur connecté
+        $achats = $achatRepository->getAchats($user->getId(), $categorie_id);
+
+        $achat = new Achat(); // formulaire vierge
+        $form = $this->createForm(AchatType::class, $achat, [
+            'action' => $this->generateUrl('app_achat_create_post'),
+            'method' => 'POST',
+        ]);
 
         return $this->render('pages/achat/list.html.twig', [
             'achats' => $achats,
-            'utilisateur_id' => $utilisateur_id,
+            'formAchat' => $form->createView(),
             'categorie_id' => $categorie_id,
         ]);
+
     }
 }

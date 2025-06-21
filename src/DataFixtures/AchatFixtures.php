@@ -19,7 +19,7 @@ class AchatFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 10; $i++) {
             $achat = new Achat();
 
-            $achat->setIdUtilisateur($this->getReference('utilisateur_' . ($i % 5 + 1), User::class));
+            $achat->setUtilisateur($this->getReference('utilisateur_' . ($i % 5 + 1), User::class));
             $achat->setIdCategorie($this->getReference('categorie_' . ($i % 5 + 1), Categorie::class));
             $achat->setMontant($faker->randomFloat(2, 10, 100));
             $achat->setDateAchat($faker->dateTimeBetween('-1 year', 'now'));

@@ -16,7 +16,7 @@ class Achat
 
     #[ORM\ManyToOne(inversedBy: 'achats')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $id_utilisateur = null;
+    private ?User $utilisateur = null;
 
     #[ORM\Column]
     private ?float $montant = null;
@@ -29,22 +29,21 @@ class Achat
 
     #[ORM\ManyToOne(inversedBy: 'achats')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $id_categorie = null;
+    private ?Categorie $categorie = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdUtilisateur(): ?User
+    public function getUtilisateur(): ?User
     {
-        return $this->id_utilisateur;
+        return $this->utilisateur;
     }
 
-    public function setIdUtilisateur(?User $id_utilisateur): static
+    public function setUtilisateur(?User $utilisateur): static
     {
-        $this->id_utilisateur = $id_utilisateur;
-
+        $this->utilisateur = $utilisateur;
         return $this;
     }
 
@@ -84,15 +83,14 @@ class Achat
         return $this;
     }
 
-    public function getIdCategorie(): ?Categorie
+    public function getCategorie(): ?Categorie
     {
-        return $this->id_categorie;
+        return $this->categorie;
     }
 
-    public function setIdCategorie(?Categorie $id_categorie): static
+    public function setCategorie(?Categorie $categorie): static
     {
-        $this->id_categorie = $id_categorie;
-
+        $this->categorie = $categorie;
         return $this;
     }
 }

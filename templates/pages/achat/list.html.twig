@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des achats{% endblock %}
+
+{% block body %}
+    <h1>Liste des achats</h1>
+
+    <div class="mb-3">
+        <a href="{{ path('app_achat_create_get') }}" class="btn btn-success">
+            Ajouter un achat
+        </a>
+    </div>
+
+    {% if achats is empty %}
+        <p>Aucun achat trouvé.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Montant</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for achat in achats %}
+                <tr>
+                    <td>{{ achat.id }}</td>
+                    <td>{{ achat.description }}</td>
+                    <td>{{ achat.montant|number_format(2, ',', ' ') }} €</td>
+                    <td>{{ achat.dateAchat ? achat.dateAchat|date('d/m/Y') : '—' }}</td>
+                    <td>
+                        <a href="{{ path('app_achat_update_get', {id: achat.id}) }}" class="btn btn-sm btn-outline-primary">Modifier</a>
+
+                        <form method="post"
+                              action="{{ path('app_achat_delete_post', {id: achat.id}) }}"
+                              style="display:inline"
+                              onsubmit="return confirm('Supprimer cet achat ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_achat_' ~ achat.id) }}">
+                            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {{ dump(app.user) }}
+
+{% endblock %}
